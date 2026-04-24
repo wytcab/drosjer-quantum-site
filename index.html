@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drosjer Quantum &mdash; Orbital Data Infrastructure</title>
+  <meta name="description" content="We audit your satellite tracking pipeline for OMM migration readiness before the July 20, 2026 TLE catalog exhaustion.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Drosjer Quantum</h1>
+    <p class="tagline">Orbital Data Infrastructure</p>
+  </header>
+
+  <section class="hero">
+    <h2>Your satellite tracking pipeline breaks on approximately July 20, 2026.</h2>
+    <p>The US Space Surveillance Network will exhaust all 5-digit catalog numbers.
+       Every system dependent on TLE format stops working for newly cataloged
+       objects. We audit your migration readiness and deliver a remediation plan
+       in 5 business days.</p>
+    <p class="hero-meta">
+      <span id="days-counter">Loading&hellip;</span> remaining.
+      Current catalog count climbing daily.
+    </p>
+    <a class="cta" href="mailto:vilhelm@drosjerquantum.com?subject=Audit%20Request">
+      Request an Audit
+    </a>
+  </section>
+
+  <section class="problem">
+    <h3>The Problem</h3>
+    <div class="cols-3">
+      <div>
+        <strong>69,999</strong>
+        <p>The real ceiling. Not 99,999. Five-digit catalog numbers exhaust at
+           69,999 due to the Alpha-5 encoding boundary.</p>
+      </div>
+      <div>
+        <strong>~68,700+</strong>
+        <p>Current count. New objects are cataloged daily. The buffer is measured
+           in weeks, not months.</p>
+      </div>
+      <div>
+        <strong>6+ years</strong>
+        <p>How long OMM format has been available. CelesTrak published it in
+           May 2020. Most pipelines still parse TLE.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="deliverable">
+    <h3>What You Get</h3>
+    <p>A Drosjer Quantum Orbital Intelligence Report delivers:</p>
+    <ul>
+      <li>Complete dependency inventory of every TLE touchpoint</li>
+      <li>Element set quality grades for every object you track</li>
+      <li>Severity-tiered impact assessment</li>
+      <li>Specific remediation plan</li>
+      <li>Post-migration validation checklist</li>
+    </ul>
+    <p>Delivered in 5 business days from codebase access.</p>
+  </section>
+
+  <section class="sample">
+    <h3>Sample Report</h3>
+    <img src="assets/sample-before.png" alt="Sample report page 1 preview">
+    <a href="assets/drosjer-quantum-sample-report-001-satnogs.pdf" download>
+      Download Sample Report #001 (SatNOGS audit, PDF)
+    </a>
+  </section>
+
+  <section class="pricing">
+    <h3>Pricing</h3>
+    <div class="cols-3">
+      <div>
+        <strong>Small</strong>
+        <p>$2,500<br>Single pipeline, &lt;50 tracked objects</p>
+      </div>
+      <div>
+        <strong>Medium</strong>
+        <p>$5,000<br>Multiple pipelines, 50&ndash;500 tracked objects</p>
+      </div>
+      <div>
+        <strong>Complex</strong>
+        <p>$8,000&ndash;12,000<br>Enterprise, CI/CD, compliance</p>
+      </div>
+    </div>
+    <p class="invoice-note">Invoicing available. Net-15 terms.</p>
+  </section>
+
+  <section class="related">
+    <h3>Related Services (Coming Q3 2026)</h3>
+    <ul>
+      <li><strong>Drosjer Quantum Orbital Risk Index</strong> &mdash; Quarterly
+          risk scoring for insured satellites. Subscription-based. Early access
+          list opens Q3 2026.</li>
+      <li><strong>Continuous Element Set Quality Monitoring</strong> &mdash;
+          Post-migration monitoring and alerting on degradation. Monthly
+          subscription.</li>
+    </ul>
+    <p>Phase 0 audit clients receive early access pricing on both.</p>
+  </section>
+
+  <section class="about">
+    <h3>About</h3>
+    <p>Drosjer Quantum builds orbital data infrastructure. Our pipelines ingest
+       OMM data from CelesTrak and Space-Track, score element set quality across
+       the active satellite catalog, and detect TLE format dependencies in
+       operational codebases.</p>
+    <p>Founder: <a href="mailto:vilhelm@drosjerquantum.com">Vilhelm Drosjer</a>
+       &middot; Bergen, Norway / United States.</p>
+  </section>
+
+  <footer>
+    <p><a href="mailto:vilhelm@drosjerquantum.com">vilhelm@drosjerquantum.com</a>
+       | Vilhelm Drosjer | Bergen, Norway / United States</p>
+    <p>Drosjer Quantum | A Drosjer Group company</p>
+  </footer>
+
+  <script>
+    const deadline = new Date('2026-07-20T00:00:00Z');
+    const days = Math.max(0, Math.ceil((deadline - new Date()) / (1000 * 60 * 60 * 24)));
+    document.getElementById('days-counter').textContent = `Approximately ${days} days`;
+  </script>
+</body>
+</html>
