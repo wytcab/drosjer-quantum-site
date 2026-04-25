@@ -186,6 +186,44 @@ section p, section li {
   border-color: var(--accent-soft);
 }
 
+.sample-note {
+  margin-top: 0.9rem;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* Trajectory teaser — replaces the explicit Phase 0 reference with a
+   four-rung roadmap (Today / Q3 2026 / 2027 / Future). */
+.trajectory-intro {
+  margin: 0.5rem 0 0.7rem;
+  color: var(--text);
+}
+
+.trajectory {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0 0.5rem;
+}
+
+.trajectory li {
+  margin: 0.4rem 0;
+  line-height: 1.45;
+  padding-left: 0.5rem;
+  border-left: 2px solid var(--border);
+}
+
+.trajectory strong {
+  display: inline-block;
+  min-width: 6.5rem;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 /* Pricing */
 .pricing .cols-3 strong {
   font-family: inherit;
