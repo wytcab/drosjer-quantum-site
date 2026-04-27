@@ -239,6 +239,12 @@ section p, section li {
   color: var(--text);
 }
 
+.pricing .cols-3 .tier-detail {
+  margin-top: 0.45rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
 .invoice-note {
   font-size: 0.85rem;
   color: var(--text-dim);
