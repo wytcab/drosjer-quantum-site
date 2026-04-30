@@ -42,6 +42,26 @@ header {
   margin-bottom: 2.5rem;
 }
 
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.site-logo {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.site-wordmark {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
 header h1 {
   font-size: 1.5rem;
   font-weight: 800;
@@ -285,4 +305,8 @@ footer p {
   .hero h2 { font-size: 1.55rem; }
   section h2 { font-size: 1.4rem; }
   .cols-3 { grid-template-columns: 1fr; }
+  .site-header { gap: 0.75rem; }
+  .site-logo { width: 48px; height: 48px; }
+  header h1 { font-size: 1.25rem; letter-spacing: 0.14em; }
+  .tagline { font-size: 0.82rem; }
 }
