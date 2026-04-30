@@ -44,13 +44,16 @@ header {
 
 .site-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 1rem;
+  padding-top: 2rem;
 }
 
 .site-logo {
-  width: 64px;
-  height: 64px;
+  width: 160px;
+  height: auto;
   flex-shrink: 0;
   display: block;
 }
@@ -58,7 +61,7 @@ header {
 .site-wordmark {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   min-width: 0;
 }
 
@@ -305,8 +308,8 @@ footer p {
   .hero h2 { font-size: 1.55rem; }
   section h2 { font-size: 1.4rem; }
   .cols-3 { grid-template-columns: 1fr; }
-  .site-header { gap: 0.75rem; }
-  .site-logo { width: 48px; height: 48px; }
+  .site-header { gap: 0.75rem; padding-top: 1.25rem; }
+  .site-logo { width: 120px; height: auto; }
   header h1 { font-size: 1.25rem; letter-spacing: 0.14em; }
   .tagline { font-size: 0.82rem; }
 }
