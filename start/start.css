@@ -1,0 +1,234 @@
+/* Drosjer Quantum /start intake page.
+   Inherits the dark Bloomberg-terminal aesthetic from /style.css.
+   Variables already defined upstream:
+     --bg, --bg-raised, --border, --text, --text-dim, --text-strong,
+     --accent (warm amber), --accent-soft, --mono.
+   This file uses local fallbacks where the spec referenced different
+   variable names so it stays robust against future site-wide renames. */
+
+:root {
+  --accent-gold: var(--accent, #f0a050);
+  --card-bg: var(--bg-raised, #131722);
+  --text-primary: var(--text-strong, #f4f6fb);
+}
+
+.header-link {
+  display: contents;
+  text-decoration: none;
+  color: inherit;
+}
+
+.start-main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.start-heading {
+  font-size: 1.75rem;
+  margin: 2rem 0 1.5rem;
+  color: var(--text-strong);
+  font-weight: 700;
+}
+
+.section-label {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-gold);
+  margin: 2rem 0 0.75rem;
+  font-weight: 700;
+}
+
+/* Tier selector */
+.tier-selector {
+  margin-bottom: 3rem;
+}
+
+.tier-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.tier-option {
+  background: var(--card-bg);
+  border: 1px solid var(--border, rgba(255,255,255,0.08));
+  border-radius: 6px;
+  padding: 1rem 0.75rem;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: inherit;
+  color: var(--text-strong);
+}
+
+.tier-option:hover {
+  border-color: var(--accent-gold);
+}
+
+.tier-option:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+.tier-option[aria-checked="true"] {
+  border-color: var(--accent-gold);
+  background: rgba(240, 160, 80, 0.08);
+}
+
+.tier-option .tier-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tier-option .tier-price {
+  font-size: 1.05rem;
+  color: var(--text-strong);
+  font-family: var(--mono);
+}
+
+.tier-option .tier-detail {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+@media (max-width: 640px) {
+  .tier-options {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Path sections */
+.path-1, .path-2 {
+  margin: 3rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card-bg);
+}
+
+.path-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.path-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-strong);
+  font-weight: 700;
+}
+
+.path-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-gold);
+  background: rgba(240, 160, 80, 0.12);
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+.path-description {
+  color: var(--text-dim);
+  margin: 0.5rem 0 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Cal.com embed container — the inline embed manages its own height
+   but we set a min-height so the layout doesn't jump while the iframe
+   is mounting. */
+.cal-embed-container {
+  min-height: 600px;
+  background: var(--bg);
+  border-radius: 4px;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+/* Path 2 button */
+.path-2-action {
+  margin-top: 1rem;
+}
+
+.path-2-action .btn-primary {
+  display: inline-block;
+  background: var(--accent-gold);
+  color: var(--bg);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+
+.path-2-action .btn-primary:hover:not(.btn-disabled) {
+  background: var(--accent-soft);
+}
+
+.path-2-action .btn-disabled {
+  background: rgba(255,255,255,0.05);
+  color: var(--text-dim);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.path-2-note {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* Bottom help */
+.bottom-help {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.bottom-help p {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Footer */
+.site-footer {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+.site-footer p {
+  margin: 0.25rem 0;
+}
+
+.footer-contact {
+  font-family: var(--mono);
+}
+
+@media (max-width: 720px) {
+  .start-heading { font-size: 1.4rem; }
+  .path-1, .path-2 { padding: 1.1rem; }
+}

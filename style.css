@@ -268,6 +268,34 @@ section p, section li {
   color: var(--text-dim);
 }
 
+/* Pricing cards as anchor — preserves the .cols-3 > div layout while
+   making the whole card clickable and keyboard-accessible. */
+.pricing .cols-3 a.pricing-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  padding: 1rem 1.1rem;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.pricing .cols-3 a.pricing-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.pricing .cols-3 a.pricing-card:hover strong {
+  color: var(--accent-soft);
+}
+
+.pricing .cols-3 a.pricing-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .invoice-note {
   font-size: 0.85rem;
   color: var(--text-dim);

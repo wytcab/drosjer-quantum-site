@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Started &mdash; Drosjer Quantum</title>
+  <meta name="description" content="Schedule a discovery call or pay directly for an OMM Migration Readiness Audit.">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="256x256" href="/assets/logo-256.png">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/start/start.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="header-link">
+      <img src="/assets/logo-256.png" alt="Drosjer Quantum logo" class="site-logo">
+      <div class="site-wordmark">
+        <h1>DROSJER QUANTUM</h1>
+        <p class="tagline">Orbital Data Infrastructure</p>
+      </div>
+    </a>
+  </header>
+
+  <main class="start-main">
+    <h2 class="start-heading">How would you like to proceed?</h2>
+
+    <section class="tier-selector">
+      <h3 class="section-label">What tier fits your scope?</h3>
+      <div class="tier-options" role="radiogroup" aria-label="Engagement tier">
+        <button class="tier-option" data-tier="small" role="radio" aria-checked="false" type="button">
+          <span class="tier-name">Small</span>
+          <span class="tier-price">$2,500</span>
+          <span class="tier-detail">Single pipeline, &lt;50 tracked objects</span>
+        </button>
+        <button class="tier-option" data-tier="medium" role="radio" aria-checked="false" type="button">
+          <span class="tier-name">Medium</span>
+          <span class="tier-price">$5,000</span>
+          <span class="tier-detail">Multiple pipelines, 50&ndash;500 objects</span>
+        </button>
+        <button class="tier-option" data-tier="complex" role="radio" aria-checked="false" type="button">
+          <span class="tier-name">Complex</span>
+          <span class="tier-price">$8,000&ndash;12,000</span>
+          <span class="tier-detail">Enterprise, CI/CD, compliance</span>
+        </button>
+        <button class="tier-option tier-tbd" data-tier="tbd" role="radio" aria-checked="true" type="button">
+          <span class="tier-name">TBD</span>
+          <span class="tier-price">Discuss with me</span>
+          <span class="tier-detail">Not sure yet</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="path-1">
+      <div class="path-header">
+        <h3>Path 1 &mdash; Schedule a Discovery Call</h3>
+        <span class="path-badge">Recommended</span>
+      </div>
+      <p class="path-description">
+        20 to 30 minute conversation to confirm scope and tier fit before payment.
+        Recommended for most prospects.
+      </p>
+      <div id="cal-booking-placeholder" class="cal-embed-container">
+        <!-- Cal.com inline embed renders here -->
+      </div>
+    </section>
+
+    <section class="path-2">
+      <div class="path-header">
+        <h3>Path 2 &mdash; Pay Now, Skip the Call</h3>
+      </div>
+      <p class="path-description">
+        If you've already determined your tier and scope from the sample report,
+        you can purchase directly. We'll reach out within 24 hours to confirm
+        codebase access and kickoff timing.
+      </p>
+      <div class="path-2-action">
+        <a id="stripe-payment-link"
+           href="#"
+           class="btn-primary btn-disabled"
+           aria-disabled="true">
+          Select a tier to enable payment
+        </a>
+      </div>
+      <p class="path-2-note" id="stripe-tier-note" style="display: none;"></p>
+    </section>
+
+    <section class="bottom-help">
+      <p>
+        Not sure which tier fits? Stay on TBD and schedule a discovery call (Path 1).
+        We'll figure out the right scope together.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Drosjer Quantum</p>
+    <p class="footer-contact">vilhelm@drosjerquantum.com</p>
+  </footer>
+
+  <!-- Cal.com inline embed (official snippet) -->
+  <script type="text/javascript">
+    (function (C, A, L) {
+      let p = function (a, ar) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else { p(cal, ar); }
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    Cal("init", "discovery-call", { origin: "https://cal.com" });
+
+    Cal.ns["discovery-call"]("inline", {
+      elementOrSelector: "#cal-booking-placeholder",
+      config: { layout: "month_view" },
+      calLink: "vilhelm-drosjer/discovery-call"
+    });
+
+    Cal.ns["discovery-call"]("ui", {
+      hideEventTypeDetails: false,
+      layout: "month_view"
+    });
+  </script>
+
+  <script src="/start/start.js"></script>
+</body>
+</html>
