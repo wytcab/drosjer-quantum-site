@@ -184,6 +184,17 @@ section p, section li {
   margin: 0.4rem 0;
 }
 
+.deliverable a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.deliverable a:hover {
+  color: var(--accent-soft);
+  opacity: 0.95;
+}
+
 /* Sample */
 .sample img {
   display: block;
