@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engagement Methodology &mdash; Drosjer Quantum</title>
+  <meta name="description" content="How a Drosjer Quantum OMM Migration Readiness Audit engagement works: deliverables, tier structure, timeline, and pricing philosophy.">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="256x256" href="/assets/logo-256.png">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/methodology/methodology.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="header-link">
+      <img src="/assets/logo-256.png" alt="Drosjer Quantum logo" class="site-logo">
+      <div class="site-wordmark">
+        <h1>DROSJER QUANTUM</h1>
+        <p class="tagline">Orbital Data Infrastructure</p>
+      </div>
+    </a>
+  </header>
+
+  <main class="methodology-main">
+
+    <h2 class="page-heading">Engagement Methodology</h2>
+
+    <p class="intro-paragraph">
+      Drosjer Quantum delivers fixed-fee orbital data infrastructure
+      audits to satellite operators, ground station providers, and
+      orbital intelligence companies. This page explains how an
+      engagement works: what we deliver, how we price, and what to
+      expect.
+    </p>
+
+    <section class="method-section">
+      <h3>What We Audit</h3>
+      <p>
+        Each engagement produces a Drosjer Quantum Orbital Intelligence
+        Report covering five components:
+      </p>
+      <ul>
+        <li><strong>Dependency Inventory</strong> &mdash; every TLE, catalog-width, Alpha-5, and format-lock-in touchpoint in your codebase, with file:line citations and severity grades.</li>
+        <li><strong>Element Set Quality Assessment</strong> &mdash; per-object freshness, update frequency, consistency, and drag-stability scoring across your tracked fleet.</li>
+        <li><strong>Impact Assessment</strong> &mdash; severity-tiered findings (critical, high, medium, low) with remediation specificity.</li>
+        <li><strong>Remediation Plan</strong> &mdash; sequenced code changes, library upgrades, and schema modifications keyed to each finding.</li>
+        <li><strong>Validation Checklist</strong> &mdash; post-migration verification steps your engineering team executes independently before production cutover.</li>
+      </ul>
+      <p>
+        A representative sample report is available on the
+        <a href="/">homepage</a>. The same methodology runs against
+        private customer codebases under NDA.
+      </p>
+    </section>
+
+    <section class="method-section">
+      <h3>Three Tiers</h3>
+      <p>
+        Engagement size is determined by source-code volume and revision
+        passes included. Tier selection happens during discovery. Mid-tier
+        ambiguity is resolved upward to eliminate scope conversations
+        mid-engagement.
+      </p>
+
+      <div class="methodology-tiers">
+
+        <div class="method-tier">
+          <h4>Small</h4>
+          <p class="tier-fee">$2,500</p>
+          <p class="tier-volume">&le;50,000 lines scanned &middot; 1 revision pass</p>
+          <p class="tier-fit">Single pipeline, &lt;50 tracked objects. Typical for university research labs, single-CubeSat operators, small ground station deployments.</p>
+        </div>
+
+        <div class="method-tier">
+          <h4>Medium</h4>
+          <p class="tier-fee">$5,000</p>
+          <p class="tier-volume">&le;250,000 lines scanned &middot; 2 revision passes</p>
+          <p class="tier-fit">Multiple pipelines, 50&ndash;500 tracked objects. Typical for mid-size LEO constellation operators, commercial ground station providers, mid-stage SSA companies.</p>
+        </div>
+
+        <div class="method-tier">
+          <h4>Complex</h4>
+          <p class="tier-fee">$8,000&ndash;12,000</p>
+          <p class="tier-volume">Custom scope &middot; 2+ revision passes</p>
+          <p class="tier-fit">Enterprise. Multiple pipelines with CI/CD integration requirements, compliance considerations (SOC 2, ITAR-relevant), or fleet sizes beyond 500 objects. Pricing within range determined by complexity factors during discovery.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="method-section">
+      <h3>Engagement Timeline</h3>
+      <ol class="timeline">
+        <li><strong>Discovery call</strong> (30 minutes). Tier confirmed, scope agreed.</li>
+        <li><strong>Engagement letter signed.</strong> Standard terms; non-negotiable on liability cap, IP ownership, and payment terms.</li>
+        <li><strong>Codebase access</strong> within 10 business days of signing. Audit clock starts on functional access.</li>
+        <li><strong>Audit delivery</strong> 5 business days from access.</li>
+        <li><strong>Revision pass(es)</strong> per tier inclusion. Findings clarified, remediation refined.</li>
+        <li><strong>Final report delivered.</strong> Engagement closes.</li>
+      </ol>
+    </section>
+
+    <section class="method-section">
+      <h3>Pricing and Payment</h3>
+      <p>
+        Engagements are fixed-fee. We do not bill hourly. Net 15 invoice
+        terms; payment via Stripe or wire transfer. Late payments accrue
+        interest at the lesser of 1.5% per month or the maximum permitted
+        by law.
+      </p>
+      <p>
+        We do not offer discounts on a discovery call. Three discount
+        paths exist as published policy:
+      </p>
+      <ul>
+        <li><strong>Referral discount</strong> &mdash; 25% off your next engagement when a referred customer signs an engagement letter.</li>
+        <li><strong>Multi-engagement discount</strong> &mdash; 25% off a second concurrent engagement (e.g., auditing two distinct codebases simultaneously).</li>
+        <li><strong>Strategic reference partner</strong> &mdash; up to 30% off in exchange for a public reference (case study, logo permission, named testimonial). Limited availability during Phase 0.</li>
+      </ul>
+      <p>
+        Discounts are non-stacking. The larger applicable discount applies.
+      </p>
+    </section>
+
+    <section class="method-section">
+      <h3>What's Included Per Tier</h3>
+      <p>
+        All three tiers include the same five-component report
+        structure described above. Tier scope determines:
+      </p>
+      <ul>
+        <li>Source-code volume covered (lines scanned)</li>
+        <li>Number of revision passes</li>
+        <li>Inclusion of CI/CD integration analysis (Complex only)</li>
+        <li>Compliance framework analysis (Complex only)</li>
+      </ul>
+      <p>
+        Out-of-scope work (additional revisions beyond included passes,
+        scope expansion mid-engagement, audits of additional codebases)
+        is quoted separately as a follow-on engagement.
+      </p>
+    </section>
+
+    <section class="method-section">
+      <h3>What We Don't Do</h3>
+      <ul>
+        <li>Implement remediation code changes for you. We deliver the plan; your engineering team executes.</li>
+        <li>Audit classified or ITAR-controlled codebases. The Drosjer Quantum methodology is designed for unclassified commercial and research codebases.</li>
+        <li>Provide ongoing managed services. Engagements close on report delivery. Phase 1 (continuous orbital risk scoring) launches separately in 2027.</li>
+      </ul>
+    </section>
+
+    <section class="method-section method-cta">
+      <h3>Ready to Start</h3>
+      <p>
+        Two paths from here. Schedule a discovery call to confirm tier
+        fit, or pay directly if you've already determined scope from the
+        sample report.
+      </p>
+      <div class="cta-buttons">
+        <a href="/start" class="btn-primary">Get Started</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Drosjer Quantum</p>
+    <p class="footer-contact">vilhelm@drosjerquantum.com</p>
+  </footer>
+
+</body>
+</html>

@@ -211,6 +211,16 @@
   margin: 0;
 }
 
+.bottom-help a {
+  color: var(--accent-gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.bottom-help a:hover {
+  opacity: 0.8;
+}
+
 /* Footer */
 .site-footer {
   padding: 2rem 1.5rem;
