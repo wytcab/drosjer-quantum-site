@@ -211,14 +211,18 @@
   margin: 0;
 }
 
-.bottom-help a {
-  color: var(--accent-gold);
+/* Force accent color even if the user-agent default link color tries to
+   take precedence (it has on prior deploys despite the lower-specificity
+   rule). Higher-specificity selector + !important pin the gold. */
+.bottom-help a,
+.start-main .bottom-help a {
+  color: var(--accent-gold) !important;
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
 }
 
 .bottom-help a:hover {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 /* Footer */

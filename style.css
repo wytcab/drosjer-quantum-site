@@ -195,6 +195,22 @@ section p, section li {
   opacity: 0.95;
 }
 
+/* Methodology callout link. Higher-specificity rule + !important so the
+   browser's user-agent default link color cannot override it on contexts
+   that bypass the section selector (e.g. when the link is rendered
+   outside the .deliverable cascade). */
+a.methodology-link,
+.deliverable a.methodology-link {
+  color: var(--accent) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+
+a.methodology-link:hover {
+  opacity: 0.85;
+}
+
 /* Sample */
 .sample img {
   display: block;

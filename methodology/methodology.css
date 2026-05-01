@@ -177,6 +177,98 @@
   background: var(--accent-soft, #f7c989);
 }
 
+/* Phase roadmap (used in The Quantum Question section) */
+.phase-roadmap {
+  margin-top: 2rem;
+}
+
+.phase-item {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border, rgba(255,255,255,0.05));
+}
+
+.phase-item:last-child {
+  border-bottom: none;
+}
+
+.phase-item:first-child {
+  padding-top: 0.5rem;
+}
+
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.phase-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-strong);
+  text-transform: none;
+  letter-spacing: 0;
+  flex: 0 1 auto;
+  font-weight: 700;
+}
+
+.phase-year {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--text-dim, #6c7280);
+  flex: 0 0 auto;
+}
+
+.phase-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  font-weight: 700;
+  flex: 0 0 auto;
+  font-family: inherit;
+}
+
+.phase-badge-applied {
+  background: var(--accent-gold);
+  color: var(--bg, #0a0e1a);
+  border: 1px solid var(--accent-gold);
+}
+
+.phase-badge-tested {
+  background: rgba(240, 160, 80, 0.08);
+  color: var(--accent-gold);
+  border: 1px solid rgba(240, 160, 80, 0.35);
+}
+
+.phase-item p {
+  margin: 0.5rem 0 0;
+  color: var(--text-strong);
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .phase-header {
+    align-items: flex-start;
+  }
+
+  .phase-header h4 {
+    flex: 1 1 100%;
+    order: 1;
+  }
+
+  .phase-year {
+    order: 2;
+  }
+
+  .phase-badge {
+    order: 3;
+  }
+}
+
 /* Footer */
 .site-footer {
   padding: 2rem 1.5rem;
