@@ -216,7 +216,8 @@
 .phase-year {
   font-family: var(--mono);
   font-size: 0.85rem;
-  color: var(--text-dim, #6c7280);
+  color: var(--accent);
+  opacity: 0.85;
   flex: 0 0 auto;
 }
 

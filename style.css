@@ -195,20 +195,29 @@ section p, section li {
   opacity: 0.95;
 }
 
-/* Methodology callout link. Higher-specificity rule + !important so the
-   browser's user-agent default link color cannot override it on contexts
-   that bypass the section selector (e.g. when the link is rendered
-   outside the .deliverable cascade). */
-a.methodology-link,
-.deliverable a.methodology-link {
+/* Methodology callout link. Brute-force selector chain because the prior
+   single-class rule was insufficient against either the user-agent default
+   :link rule or a stale cached stylesheet. We pin the color across every
+   plausible cascade context the link can sit in (any parent section, any
+   bare anchor selector matching the href). */
+a[href="/methodology"].methodology-link,
+body a[href="/methodology"].methodology-link,
+.deliverable a.methodology-link,
+.deliverable a[href="/methodology"],
+body .deliverable a[href="/methodology"],
+body .deliverable a.methodology-link,
+section.deliverable a[href="/methodology"],
+body section.deliverable a.methodology-link {
   color: var(--accent) !important;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  font-weight: 500;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+  font-weight: 500 !important;
 }
 
-a.methodology-link:hover {
-  opacity: 0.85;
+a[href="/methodology"].methodology-link:hover,
+.deliverable a[href="/methodology"]:hover,
+body .deliverable a.methodology-link:hover {
+  opacity: 0.85 !important;
 }
 
 /* Sample */
