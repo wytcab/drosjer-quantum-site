@@ -1,12 +1,12 @@
 (function () {
   'use strict';
 
-  // Stripe Payment Links — placeholders until the live-mode flip.
-  // Tracked in wiki/business/pricing.md "Live Mode Switch Checklist".
+  // Stripe Payment Links — live as of 2026-11-01. Drosjer Quantum
+  // sub-account live as Individual sole-proprietorship.
   var STRIPE_LINKS = {
-    small:   'https://buy.stripe.com/PLACEHOLDER_LIVE_SMALL',
-    medium:  'https://buy.stripe.com/PLACEHOLDER_LIVE_MEDIUM',
-    complex: 'https://buy.stripe.com/PLACEHOLDER_LIVE_COMPLEX'
+    small:   'https://buy.stripe.com/3cIbJ3bt93NZfNj8XZ2kw00',
+    medium:  'https://buy.stripe.com/7sY4gB40HesDbx3def2kw01',
+    complex: 'https://buy.stripe.com/fZudRbfJpckv30xdef2kw02'
   };
 
   var TIER_LABELS = {

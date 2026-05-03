@@ -1,0 +1,120 @@
+/* Drosjer Quantum /terms page.
+   Inherits the dark Bloomberg-terminal aesthetic from /style.css.
+   CSS-var fallbacks keep the page self-contained against future
+   variable renames. */
+
+:root {
+  --accent-gold: var(--accent, #f0a050);
+  --text-primary: var(--text-strong, #f4f6fb);
+}
+
+.header-link {
+  display: contents;
+  text-decoration: none;
+  color: inherit;
+}
+
+.terms-main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.page-heading {
+  font-size: 2rem;
+  margin: 2rem 0 0.5rem;
+  color: var(--text-strong);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.effective-date {
+  font-size: 0.85rem;
+  color: var(--text-dim, #6c7280);
+  font-family: var(--mono);
+  margin-bottom: 2rem;
+}
+
+.intro-paragraph {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-strong);
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border, rgba(255,255,255,0.06));
+}
+
+.terms-section {
+  margin: 2rem 0;
+}
+
+.terms-section h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.terms-section p {
+  color: var(--text-strong);
+  line-height: 1.7;
+  margin: 0.75rem 0;
+  font-size: 0.95rem;
+}
+
+.terms-section ul {
+  color: var(--text-strong);
+  line-height: 1.75;
+  padding-left: 1.5rem;
+  margin: 0.75rem 0;
+}
+
+.terms-section li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.terms-section a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.terms-section a:hover {
+  opacity: 0.85;
+}
+
+.terms-contact p {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .terms-main {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .page-heading {
+    font-size: 1.6rem;
+  }
+}
+
+/* Footer (matches /methodology + /start) */
+.site-footer {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: var(--text-dim, #6c7280);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border, rgba(255,255,255,0.05));
+}
+
+.site-footer p {
+  margin: 0.25rem 0;
+}
+
+.footer-contact {
+  font-family: var(--mono);
+}
