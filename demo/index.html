@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fleet Risk Report &mdash; Orbital Risk Index</title>
+<style>
+@page { size: A4; margin: 16mm; }
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #222; line-height: 1.45; font-size: 10.5pt;
+}
+h1, h2, h3 { margin-top: 1.2em; margin-bottom: 0.4em; }
+h1 { font-size: 22pt; border-bottom: none; padding-bottom: 0.2em; letter-spacing: 0.02em; }
+h2 { font-size: 14pt; border-bottom: 1px solid #aaa; padding-bottom: 0.15em; }
+h3 { font-size: 11.5pt; }
+.report-masthead {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 8pt; padding-bottom: 0.5em; margin-top: 0;
+  border-bottom: 2px solid #555;
+}
+.report-masthead .logo { width: 50px; height: auto; display: block; }
+.report-masthead h1 { margin: 0; font-size: 22pt; letter-spacing: 0.02em; }
+.wordmark { font-weight: 800; letter-spacing: 0.12em; color: #222; }
+.subtitle { color: #666; font-size: 10pt; margin-top: -0.4em; }
+.metadata { font-size: 9.5pt; color: #555; margin: 0.6em 0 1em; }
+.metadata span { display: inline-block; margin-right: 1.2em; }
+/* grade colors (shared with the Phase 0 audit house style) */
+.grade-A { color: #0f7d3a; }
+.grade-B { color: #5b8a2b; }
+.grade-C { color: #b07600; }
+.grade-D { color: #c24800; }
+.grade-F { color: #a12020; }
+.bg-A { background: #0f7d3a; } .bg-B { background: #5b8a2b; } .bg-C { background: #b07600; }
+.bg-D { background: #c24800; } .bg-F { background: #a12020; }
+/* low-confidence grade treatment: the glyph must NOT read as an authoritative verdict,
+   but it must STILL carry the risk hue (a low-conf D != a low-conf A). Mute each grade
+   color ~50% toward grey (hue survives, washed out), add a dashed box + a * marker, and
+   co-locate the loud LOW CONFIDENCE pill. Two-class selectors win over .grade-X without
+   !important. Plain hex (no CSS filter) so WeasyPrint/PDF renders it. */
+.grade.grade-low { border: 2px dashed #b0b0b0; border-radius: 6px; padding: 0 0.08em; }
+.grade-low.grade-A { color: #487f5d; }
+.grade-low.grade-B { color: #6e8556; }
+.grade-low.grade-C { color: #987b40; }
+.grade-low.grade-D { color: #a16440; }
+.grade-low.grade-F { color: #905050; }
+.grade-mark { font-size: 0.5em; font-weight: 800; vertical-align: super; color: #7a3a00; }
+.grade-cluster { display: flex; flex-direction: column; align-items: center; gap: 4pt; }
+.grade-conf { display: flex; flex-direction: column; align-items: center; gap: 2pt; }
+.grade-conf .pill-low { margin-left: 0; font-size: 9pt; padding: 2px 8px; }
+.grade-conf .conf-val { font-size: 9pt; font-weight: 700; color: #7a3a00; }
+.grade-legend { font-style: italic; }
+table { width: 100%; border-collapse: collapse; margin: 0.5em 0 1em; font-size: 9.5pt; }
+th, td { text-align: left; padding: 0.4em 0.6em; border-bottom: 1px solid #ddd; vertical-align: top; }
+th { background: #eee; font-weight: 600; }
+tr:nth-child(even) td { background: #fafafa; }
+.note { color: #555; font-size: 9.5pt; }
+footer { margin-top: 3em; font-size: 8.5pt; color: #666; border-top: 1px solid #ddd; padding-top: 0.5em; }
+
+/* --- public demo landing block --- */
+.public-intro { margin: 1em 0 0.5em; }
+.public-intro .lede { font-size: 11pt; color: #333; margin: 0.2em 0; }
+.public-intro .tagline { font-size: 11.5pt; font-weight: 700; color: #20406a; margin: 0.4em 0; }
+.public-intro .public-data { font-size: 9.5pt; color: #555; font-style: italic; margin: 0.3em 0 0.6em; }
+.public-intro .cta { margin: 0.4em 0 0; font-size: 10pt; }
+.public-intro .cta-button {
+  display: inline-block; background: #20406a; color: #fff; text-decoration: none;
+  padding: 0.4em 0.9em; border-radius: 5px; font-weight: 700;
+}
+.public-intro .cta-email { color: #555; margin-left: 0.8em; font-size: 9.5pt; }
+
+/* --- calibration banner: honesty, prominent, near the top --- */
+.calibration-banner {
+  border-left: 4px solid #b08a3a; background: #faf6ed;
+  padding: 0.7em 1em; margin: 0.8em 0 1.2em;
+  font-size: 10pt; color: #5a4a18; font-weight: 600;
+}
+.sample-notice {
+  border-left: 3px solid #777; background: #f3f3f3;
+  padding: 0.55em 0.9em; margin: 0.6em 0 1.1em;
+  font-size: 9.5pt; font-style: italic; color: #444;
+}
+
+/* --- fleet grade distribution --- */
+.grade-dist { display: flex; gap: 0.6em; margin: 0.6em 0 1.2em; flex-wrap: wrap; }
+.grade-chip {
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 3.2em; padding: 0.4em 0.6em; border-radius: 5px; color: #fff;
+}
+.grade-chip .g { font-size: 15pt; font-weight: 800; line-height: 1; }
+.grade-chip .n { font-size: 9pt; }
+
+/* --- per-object risk card --- */
+.risk-card {
+  border: 1px solid #ddd; border-radius: 6px; padding: 0.8em 1em;
+  margin: 0.8em 0; page-break-inside: avoid;
+}
+.risk-card-head { display: flex; align-items: center; gap: 1em; }
+.risk-card-head .grade { font-size: 34pt; font-weight: 800; line-height: 1; width: 1.1em; text-align: center; }
+.risk-card-head .ident { flex: 1; }
+.risk-card-head .ident .name { font-size: 12pt; font-weight: 700; }
+.risk-card-head .ident .meta { font-size: 9pt; color: #666; }
+.composite { font-size: 11pt; font-weight: 600; }
+/* confidence is FIRST-CLASS: a prominent badge next to the grade, never fine print */
+.confidence-badge {
+  display: inline-block; padding: 0.25em 0.6em; border-radius: 4px;
+  font-size: 9.5pt; font-weight: 700; background: #e8eef6; color: #20406a;
+  border: 1px solid #b9c9de;
+}
+.confidence-badge .lbl { font-weight: 600; color: #45617f; }
+.pill {
+  display: inline-block; padding: 1px 7px; border-radius: 10px;
+  font-size: 8.5pt; font-weight: 700; letter-spacing: 0.03em; margin-left: 0.4em;
+}
+.pill-low { background: #f0d4b5; color: #7a3a00; }
+.degraded-badge {
+  display: block; margin: 0.5em 0 0.2em;
+  border-left: 3px solid #c24800; background: #fdf1e7;
+  padding: 0.4em 0.7em; font-size: 9pt; color: #7a3a00; font-weight: 600;
+}
+.delta-line { font-size: 9pt; color: #444; margin-top: 0.4em; }
+.delta-line .muted { color: #999; font-style: italic; }
+/* six-factor breakdown */
+.factors { font-size: 9pt; margin-top: 0.5em; }
+.factors th, .factors td { padding: 0.3em 0.5em; }
+.bar-wrap { background: #eee; border-radius: 3px; height: 0.9em; width: 100%; position: relative; }
+.bar { height: 0.9em; border-radius: 3px; background: #7088a8; }
+.factor-degraded td { color: #7a3a00; }
+.tag-degraded {
+  display: inline-block; padding: 0px 5px; border-radius: 3px;
+  background: #f0d4b5; color: #7a3a00; font-size: 8pt; font-weight: 700;
+}
+.method { font-size: 9pt; color: #444; }
+.method dt { font-weight: 600; margin-top: 0.4em; }
+</style>
+</head>
+<body>
+
+<header class="report-masthead">
+  <img class="logo" src="file:///Users/wtc3/drosjer-quantum/src/report/assets/logo.png" alt="Drosjer Quantum logo">
+  <h1><span class="wordmark">DROSJER QUANTUM</span></h1>
+  <div class="subtitle">Fleet Risk Report &mdash; Orbital Risk Index</div>
+</header>
+
+<div class="public-intro">
+  <p class="lede">Drosjer Quantum continuously scores orbital risk for satellite fleets from public tracking data, breaking every score into six transparent factors with a confidence level you can see.</p>
+  <p class="tagline">Continuous orbital risk scoring. Six transparent factors. Confidence on every score. Calibration against historical events in progress.</p>
+  <p class="public-data">Scores below are computed from public CelesTrak / Space-Track data on a demonstration sample of public objects. No customer fleet is shown.</p>
+  <p class="public-data">Risk grades are conditions-dependent: they rise during geomagnetic activity and busier conjunction periods, and the engine re-scores continuously as conditions change. A grade is a live reading of current conditions, not a fixed label — the responsiveness is the point.</p>
+  <p class="cta">
+    <a class="cta-button" href="https://cal.com/vilhelm-drosjer/discovery-call">Request early access</a>
+    <span class="cta-email">or email <a href="mailto:vilhelm@drosjerquantum.com">vilhelm@drosjerquantum.com</a></span>
+  </p>
+</div>
+
+<div class="metadata">
+  <span><b>Generated:</b> 2026-06-03T23:16:07.702899+00:00</span>
+  <span><b>Model version:</b> h-1.0</span>
+  <span><b>Objects:</b> 18 scored / 18 requested</span>
+</div>
+
+<div class="sample-notice">
+  Sample fleet report rendered for demonstration. The objects and scores shown are
+  illustrative of the report format.
+</div>
+
+<div class="calibration-banner">Calibration status: factor weights and grade bands are STARTING values (model h-1.0), not yet calibrated against historical events; calibration is in progress. Scores are an explainable heuristic, not a forecast.</div>
+
+<h2>Fleet risk summary</h2>
+<p class="note">Grade distribution across the 18 scored object(s). Higher risk = worse grade (A = lowest risk).</p>
+<div class="grade-dist">
+  <div class="grade-chip bg-A">
+    <span class="g">A</span>
+    <span class="n">10</span>
+  </div>
+  <div class="grade-chip bg-B">
+    <span class="g">B</span>
+    <span class="n">0</span>
+  </div>
+  <div class="grade-chip bg-C">
+    <span class="g">C</span>
+    <span class="n">5</span>
+  </div>
+  <div class="grade-chip bg-D">
+    <span class="g">D</span>
+    <span class="n">3</span>
+  </div>
+  <div class="grade-chip bg-F">
+    <span class="g">F</span>
+    <span class="n">0</span>
+  </div>
+</div>
+
+<h2>Objects by risk (highest first)</h2>
+<p class="note grade-legend">* Muted grade = reduced confidence: derived from the surviving (non-degraded) factors; read it together with the confidence value, not as a standalone verdict.</p>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-D grade-low">D<span class="grade-mark">*</span></div>
+      <div class="grade-conf">
+        <span class="pill pill-low">LOW CONFIDENCE</span>
+        <span class="conf-val">confidence 0.20</span>
+      </div>
+    </div>
+    <div class="ident">
+      <div class="name">DELTA 1 DEB</div>
+      <div class="meta">NORAD 12255 &middot; LEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.777</div>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 2 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    element_set_quality, operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 100%;"></div></div>
+        <span>1.00</span>
+      </td>
+      <td>0.25</td>
+      <td>13 close approach(es) within +/-7d (count factor 1.00, worst severity 1.00).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Element-set quality <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality could not assess (no/insufficient element sets); neutral prior.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 70%;"></div></div>
+        <span>0.70</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime LEO: base risk 0.70.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 100%;"></div></div>
+        <span>1.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~48 yr since launch (1978); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-D grade-low">D<span class="grade-mark">*</span></div>
+      <div class="grade-conf">
+        <span class="pill pill-low">LOW CONFIDENCE</span>
+        <span class="conf-val">confidence 0.20</span>
+      </div>
+    </div>
+    <div class="ident">
+      <div class="name">SL-16 DEB</div>
+      <div class="meta">NORAD 23709 &middot; LEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.777</div>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 2 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    element_set_quality, operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 100%;"></div></div>
+        <span>1.00</span>
+      </td>
+      <td>0.25</td>
+      <td>14 close approach(es) within +/-7d (count factor 1.00, worst severity 1.00).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Element-set quality <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality could not assess (no/insufficient element sets); neutral prior.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 70%;"></div></div>
+        <span>0.70</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime LEO: base risk 0.70.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 100%;"></div></div>
+        <span>1.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~31 yr since launch (1995); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-D grade-low">D<span class="grade-mark">*</span></div>
+      <div class="grade-conf">
+        <span class="pill pill-low">LOW CONFIDENCE</span>
+        <span class="conf-val">confidence 0.20</span>
+      </div>
+    </div>
+    <div class="ident">
+      <div class="name">VANGUARD R/B</div>
+      <div class="meta">NORAD 16 &middot; MEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.719</div>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 2 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    element_set_quality, operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 100%;"></div></div>
+        <span>1.00</span>
+      </td>
+      <td>0.25</td>
+      <td>15 close approach(es) within +/-7d (count factor 1.00, worst severity 1.00).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Element-set quality <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality could not assess (no/insufficient element sets); neutral prior.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 45%;"></div></div>
+        <span>0.45</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime MEO: base risk 0.45.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 100%;"></div></div>
+        <span>1.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~68 yr since launch (1958); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-C grade-low">C<span class="grade-mark">*</span></div>
+      <div class="grade-conf">
+        <span class="pill pill-low">LOW CONFIDENCE</span>
+        <span class="conf-val">confidence 0.20</span>
+      </div>
+    </div>
+    <div class="ident">
+      <div class="name">NOAA 17 DEB</div>
+      <div class="meta">NORAD 49479 &middot; LEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.676</div>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 2 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    element_set_quality, operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 75%;"></div></div>
+        <span>0.75</span>
+      </td>
+      <td>0.25</td>
+      <td>5 close approach(es) within +/-7d (count factor 0.50, worst severity 1.00).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Element-set quality <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality could not assess (no/insufficient element sets); neutral prior.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 70%;"></div></div>
+        <span>0.70</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime LEO: base risk 0.70.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 98%;"></div></div>
+        <span>0.98</span>
+      </td>
+      <td>0.15</td>
+      <td>~24 yr since launch (2002); risk 0.98 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-C grade-low">C<span class="grade-mark">*</span></div>
+      <div class="grade-conf">
+        <span class="pill pill-low">LOW CONFIDENCE</span>
+        <span class="conf-val">confidence 0.20</span>
+      </div>
+    </div>
+    <div class="ident">
+      <div class="name">RADUGA 12</div>
+      <div class="meta">NORAD 13974 &middot; GEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.666</div>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 2 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    element_set_quality, operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 89%;"></div></div>
+        <span>0.89</span>
+      </td>
+      <td>0.25</td>
+      <td>14 close approach(es) within +/-7d (count factor 1.00, worst severity 0.78).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Element-set quality <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality could not assess (no/insufficient element sets); neutral prior.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 40%;"></div></div>
+        <span>0.40</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime GEO: base risk 0.40.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 100%;"></div></div>
+        <span>1.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~43 yr since launch (1983); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-C grade-low">C<span class="grade-mark">*</span></div>
+      <div class="grade-conf">
+        <span class="pill pill-low">LOW CONFIDENCE</span>
+        <span class="conf-val">confidence 0.20</span>
+      </div>
+    </div>
+    <div class="ident">
+      <div class="name">GSTAR 1</div>
+      <div class="meta">NORAD 15677 &middot; GEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.632</div>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 2 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    element_set_quality, operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 80%;"></div></div>
+        <span>0.80</span>
+      </td>
+      <td>0.25</td>
+      <td>15 close approach(es) within +/-7d (count factor 1.00, worst severity 0.61).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Element-set quality <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality could not assess (no/insufficient element sets); neutral prior.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 40%;"></div></div>
+        <span>0.40</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime GEO: base risk 0.40.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 100%;"></div></div>
+        <span>1.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~41 yr since launch (1985); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-C grade-low">C<span class="grade-mark">*</span></div>
+      <div class="grade-conf">
+        <span class="pill pill-low">LOW CONFIDENCE</span>
+        <span class="conf-val">confidence 0.20</span>
+      </div>
+    </div>
+    <div class="ident">
+      <div class="name">SL-12 R/B(2)</div>
+      <div class="meta">NORAD 25598 &middot; MEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.631</div>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 2 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    element_set_quality, operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 77%;"></div></div>
+        <span>0.77</span>
+      </td>
+      <td>0.25</td>
+      <td>18 close approach(es) within +/-7d (count factor 1.00, worst severity 0.54).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Element-set quality <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality could not assess (no/insufficient element sets); neutral prior.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 45%;"></div></div>
+        <span>0.45</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime MEO: base risk 0.45.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 100%;"></div></div>
+        <span>1.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~28 yr since launch (1998); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-C grade-low">C<span class="grade-mark">*</span></div>
+      <div class="grade-conf">
+        <span class="pill pill-low">LOW CONFIDENCE</span>
+        <span class="conf-val">confidence 0.20</span>
+      </div>
+    </div>
+    <div class="ident">
+      <div class="name">COSMOS 2288 (GLONASS)</div>
+      <div class="meta">NORAD 23205 &middot; MEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.557</div>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 2 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    element_set_quality, operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 58%;"></div></div>
+        <span>0.58</span>
+      </td>
+      <td>0.25</td>
+      <td>90 close approach(es) within +/-7d (count factor 1.00, worst severity 0.16).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Element-set quality <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality could not assess (no/insufficient element sets); neutral prior.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 45%;"></div></div>
+        <span>0.45</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime MEO: base risk 0.45.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 100%;"></div></div>
+        <span>1.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~32 yr since launch (1994); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-A grade-low">A<span class="grade-mark">*</span></div>
+      <div class="grade-conf">
+        <span class="pill pill-low">LOW CONFIDENCE</span>
+        <span class="conf-val">confidence 0.20</span>
+      </div>
+    </div>
+    <div class="ident">
+      <div class="name">EXPLORER 22</div>
+      <div class="meta">NORAD 899 &middot; LEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.392</div>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 2 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    element_set_quality, operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.25</td>
+      <td>0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Element-set quality <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality could not assess (no/insufficient element sets); neutral prior.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 70%;"></div></div>
+        <span>0.70</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime LEO: base risk 0.70.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 100%;"></div></div>
+        <span>1.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~62 yr since launch (1964); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-A grade-low">A<span class="grade-mark">*</span></div>
+      <div class="grade-conf">
+        <span class="pill pill-low">LOW CONFIDENCE</span>
+        <span class="conf-val">confidence 0.20</span>
+      </div>
+    </div>
+    <div class="ident">
+      <div class="name">VANGUARD DEB</div>
+      <div class="meta">NORAD 1576 &middot; LEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.392</div>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 2 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    element_set_quality, operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.25</td>
+      <td>0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Element-set quality <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality could not assess (no/insufficient element sets); neutral prior.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 70%;"></div></div>
+        <span>0.70</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime LEO: base risk 0.70.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 100%;"></div></div>
+        <span>1.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~68 yr since launch (1958); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-A grade-low">A<span class="grade-mark">*</span></div>
+      <div class="grade-conf">
+        <span class="pill pill-low">LOW CONFIDENCE</span>
+        <span class="conf-val">confidence 0.20</span>
+      </div>
+    </div>
+    <div class="ident">
+      <div class="name">COSMOS 2235 (GLONASS)</div>
+      <div class="meta">NORAD 22514 &middot; MEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.335</div>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 2 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    element_set_quality, operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.25</td>
+      <td>0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Element-set quality <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality could not assess (no/insufficient element sets); neutral prior.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 45%;"></div></div>
+        <span>0.45</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime MEO: base risk 0.45.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 100%;"></div></div>
+        <span>1.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~33 yr since launch (1993); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-A grade-low">A<span class="grade-mark">*</span></div>
+      <div class="grade-conf">
+        <span class="pill pill-low">LOW CONFIDENCE</span>
+        <span class="conf-val">confidence 0.20</span>
+      </div>
+    </div>
+    <div class="ident">
+      <div class="name">TBA - TO BE ASSIGNED</div>
+      <div class="meta">NORAD 270449 &middot; LEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.277</div>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 2 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    element_set_quality, operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.25</td>
+      <td>0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Element-set quality <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality could not assess (no/insufficient element sets); neutral prior.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 70%;"></div></div>
+        <span>0.70</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime LEO: base risk 0.70.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50</span>
+      </td>
+      <td>0.15</td>
+      <td>Launch year unknown; neutral age assumed. Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-A">A</div>
+    </div>
+    <div class="ident">
+      <div class="name">STARLINK-36488</div>
+      <div class="meta">NORAD 67306 &middot; LEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.225</div>
+    </div>
+    <div>
+      <span class="confidence-badge"><span class="lbl">Confidence</span> 0.95</span>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 1 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.25</td>
+      <td>0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00).</td>
+    </tr>
+    <tr class="">
+      <td>Element-set quality</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 43%;"></div></div>
+        <span>0.43</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality grade C (composite 57/100) -&gt; inverted risk 0.43: poor tracking is risk.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 70%;"></div></div>
+        <span>0.70</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime LEO: base risk 0.70.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~0 yr since launch (2026); risk 0.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-A">A</div>
+    </div>
+    <div class="ident">
+      <div class="name">CSG-3</div>
+      <div class="meta">NORAD 67304 &middot; LEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.210</div>
+    </div>
+    <div>
+      <span class="confidence-badge"><span class="lbl">Confidence</span> 0.95</span>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 1 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.25</td>
+      <td>0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00).</td>
+    </tr>
+    <tr class="">
+      <td>Element-set quality</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 37%;"></div></div>
+        <span>0.37</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality grade C (composite 63/100) -&gt; inverted risk 0.37: poor tracking is risk.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 70%;"></div></div>
+        <span>0.70</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime LEO: base risk 0.70.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~0 yr since launch (2026); risk 0.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-A">A</div>
+    </div>
+    <div class="ident">
+      <div class="name">NAVSTAR 86 (USA 585)</div>
+      <div class="meta">NORAD 68791 &middot; MEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.182</div>
+    </div>
+    <div>
+      <span class="confidence-badge"><span class="lbl">Confidence</span> 0.95</span>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 1 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.25</td>
+      <td>0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00).</td>
+    </tr>
+    <tr class="">
+      <td>Element-set quality</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 44%;"></div></div>
+        <span>0.44</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality grade C (composite 56/100) -&gt; inverted risk 0.44: poor tracking is risk.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 45%;"></div></div>
+        <span>0.45</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime MEO: base risk 0.45.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~0 yr since launch (2026); risk 0.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-A">A</div>
+    </div>
+    <div class="ident">
+      <div class="name">O3B MPOWER F9</div>
+      <div class="meta">NORAD 64866 &middot; MEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.181</div>
+    </div>
+    <div>
+      <span class="confidence-badge"><span class="lbl">Confidence</span> 0.95</span>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 1 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.25</td>
+      <td>0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00).</td>
+    </tr>
+    <tr class="">
+      <td>Element-set quality</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 28%;"></div></div>
+        <span>0.28</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality grade B (composite 72/100) -&gt; inverted risk 0.28: poor tracking is risk.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 45%;"></div></div>
+        <span>0.45</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime MEO: base risk 0.45.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 20%;"></div></div>
+        <span>0.20</span>
+      </td>
+      <td>0.15</td>
+      <td>~1 yr since launch (2025); risk 0.20 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-A">A</div>
+    </div>
+    <div class="ident">
+      <div class="name">THURAYA-4</div>
+      <div class="meta">NORAD 62483 &middot; GEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.166</div>
+    </div>
+    <div>
+      <span class="confidence-badge"><span class="lbl">Confidence</span> 0.95</span>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 1 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.25</td>
+      <td>0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00).</td>
+    </tr>
+    <tr class="">
+      <td>Element-set quality</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 26%;"></div></div>
+        <span>0.26</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality grade B (composite 74/100) -&gt; inverted risk 0.26: poor tracking is risk.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 40%;"></div></div>
+        <span>0.40</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime GEO: base risk 0.40.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 20%;"></div></div>
+        <span>0.20</span>
+      </td>
+      <td>0.15</td>
+      <td>~1 yr since launch (2025); risk 0.20 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+<div class="risk-card">
+  <div class="risk-card-head">
+    <div class="grade-cluster">
+      <div class="grade grade-A">A</div>
+    </div>
+    <div class="ident">
+      <div class="name">ECHOSTAR 25</div>
+      <div class="meta">NORAD 68126 &middot; GEO &middot; scored 2026-06-03T23:16:07.672550+00:00</div>
+      <div class="composite">Composite risk 0.142</div>
+    </div>
+    <div>
+      <span class="confidence-badge"><span class="lbl">Confidence</span> 0.95</span>
+    </div>
+  </div>
+
+  <div class="degraded-badge">
+    &#9888; 1 of 6 factor(s) degraded to the neutral prior (0.50) and were dropped from the weighted mean:
+    operator_track_record. The grade reflects the surviving factors only.
+  </div>
+
+  <table class="factors">
+    <tr><th style="width: 22%;">Factor</th><th style="width: 26%;">Contribution</th><th style="width: 8%;">Weight</th><th>Detail</th></tr>
+    <tr class="">
+      <td>Conjunction frequency</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.25</td>
+      <td>0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00).</td>
+    </tr>
+    <tr class="">
+      <td>Element-set quality</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 30%;"></div></div>
+        <span>0.30</span>
+      </td>
+      <td>0.20</td>
+      <td>Phase 0 quality grade C (composite 70/100) -&gt; inverted risk 0.30: poor tracking is risk.</td>
+    </tr>
+    <tr class="">
+      <td>Orbital regime</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 40%;"></div></div>
+        <span>0.40</span>
+      </td>
+      <td>0.15</td>
+      <td>Orbital regime GEO: base risk 0.40.</td>
+    </tr>
+    <tr class="">
+      <td>Component age</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.15</td>
+      <td>~0 yr since launch (2026); risk 0.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry).</td>
+    </tr>
+    <tr class="factor-degraded">
+      <td>Operator track record <span class="tag-degraded">DEGRADED</span></td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 50%;"></div></div>
+        <span>0.50 &rarr; neutral prior</span>
+      </td>
+      <td>0.15</td>
+      <td>Operator history insufficient (0 record(s) &lt; 5); neutral prior. Strengthens as labeled history accumulates.</td>
+    </tr>
+    <tr class="">
+      <td>Space weather</td>
+      <td>
+        <div class="bar-wrap"><div class="bar" style="width: 0%;"></div></div>
+        <span>0.00</span>
+      </td>
+      <td>0.10</td>
+      <td>Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 2h old.</td>
+    </tr>
+  </table>
+
+  <div class="delta-line">
+      <span class="muted">No daily delta yet (delta history begins once the object is scored on consecutive runs).</span>
+  </div>
+</div>
+
+
+<h2>Methodology</h2>
+<div class="method">
+  <p>Six factors compose the risk score; higher normalized values mean more risk. A degraded factor (stale or missing input) is dropped and the surviving weights renormalize &mdash; its neutral prior is never folded into the mean. Confidence is a separate axis from the risk grade.</p>
+  <dl>
+    <dt>Factors &amp; weights</dt>
+    <dd>
+orbital_regime 0.15 &middot; conjunction_frequency 0.25 &middot; space_weather 0.10 &middot; component_age 0.15 &middot; operator_track_record 0.15 &middot; element_set_quality 0.20    </dd>
+    <dt>Grade bands (composite &ge; threshold &rarr; grade; higher = worse)</dt>
+    <dd>
+F &ge; 0.85 &middot; D &ge; 0.70 &middot; C &ge; 0.55 &middot; B &ge; 0.40 &middot; A &ge; 0.00    </dd>
+    <dt>Model version</dt>
+    <dd>h-1.0 (printed for reproducibility &mdash; a stored score is recomputable against this version's frozen weights and bands)</dd>
+    <dt>Calibration</dt>
+    <dd>Calibration status: factor weights and grade bands are STARTING values (model h-1.0), not yet calibrated against historical events; calibration is in progress. Scores are an explainable heuristic, not a forecast.</dd>
+  </dl>
+</div>
+
+<footer>
+  Drosjer Quantum &middot; Orbital Risk Index &middot; model h-1.0 &middot; 2026-06-03T23:16:07.702899+00:00
+</footer>
+
+</body>
+</html>
