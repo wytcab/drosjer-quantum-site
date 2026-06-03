@@ -1,0 +1,1260 @@
+{
+  "customer_name": "",
+  "generated_at": "2026-06-03T23:16:07.702899+00:00",
+  "model_version": "h-1.0",
+  "grade_bands": [
+    [
+      0.85,
+      "F"
+    ],
+    [
+      0.7,
+      "D"
+    ],
+    [
+      0.55,
+      "C"
+    ],
+    [
+      0.4,
+      "B"
+    ],
+    [
+      0.0,
+      "A"
+    ]
+  ],
+  "factor_weights": {
+    "orbital_regime": 0.15,
+    "conjunction_frequency": 0.25,
+    "space_weather": 0.1,
+    "component_age": 0.15,
+    "operator_track_record": 0.15,
+    "element_set_quality": 0.2
+  },
+  "grade_distribution": {
+    "A": 10,
+    "B": 0,
+    "C": 5,
+    "D": 3,
+    "F": 0
+  },
+  "n_objects": 18,
+  "n_scored": 18,
+  "n_unscored": 0,
+  "objects": [
+    {
+      "norad_cat_id": 12255,
+      "object_name": "DELTA 1 DEB",
+      "orbital_regime": "LEO",
+      "composite_score": 0.7769230769230769,
+      "grade": "D",
+      "confidence": 0.2,
+      "low_confidence": true,
+      "degraded_factors": [
+        "element_set_quality",
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 1.0,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "13 close approach(es) within +/-7d (count factor 1.00, worst severity 1.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.5,
+          "weight": 0.2,
+          "degraded": true,
+          "detail": "Phase 0 quality could not assess (no/insufficient element sets); neutral prior."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.7,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime LEO: base risk 0.70."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 1.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~48 yr since launch (1978); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "f3584e5197b0bfa2b627149aac57bc7ae39e9d1822166bb5b2a4eef9982e20cd",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 23709,
+      "object_name": "SL-16 DEB",
+      "orbital_regime": "LEO",
+      "composite_score": 0.7769230769230769,
+      "grade": "D",
+      "confidence": 0.2,
+      "low_confidence": true,
+      "degraded_factors": [
+        "element_set_quality",
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 1.0,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "14 close approach(es) within +/-7d (count factor 1.00, worst severity 1.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.5,
+          "weight": 0.2,
+          "degraded": true,
+          "detail": "Phase 0 quality could not assess (no/insufficient element sets); neutral prior."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.7,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime LEO: base risk 0.70."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 1.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~31 yr since launch (1995); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "a542a1f08353f2c9acc998345ec7a24f20c58954d4fbc14c44e7bdfee0047e99",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 16,
+      "object_name": "VANGUARD R/B",
+      "orbital_regime": "MEO",
+      "composite_score": 0.7192307692307692,
+      "grade": "D",
+      "confidence": 0.2,
+      "low_confidence": true,
+      "degraded_factors": [
+        "element_set_quality",
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 1.0,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "15 close approach(es) within +/-7d (count factor 1.00, worst severity 1.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.5,
+          "weight": 0.2,
+          "degraded": true,
+          "detail": "Phase 0 quality could not assess (no/insufficient element sets); neutral prior."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.45,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime MEO: base risk 0.45."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 1.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~68 yr since launch (1958); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "5839bbf898c8584d1631a981571cb939e682de9a01af274addaaa5360fa14517",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 49479,
+      "object_name": "NOAA 17 DEB",
+      "orbital_regime": "LEO",
+      "composite_score": 0.676106745487678,
+      "grade": "C",
+      "confidence": 0.2,
+      "low_confidence": true,
+      "degraded_factors": [
+        "element_set_quality",
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.75,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "5 close approach(es) within +/-7d (count factor 0.50, worst severity 1.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.5,
+          "weight": 0.2,
+          "degraded": true,
+          "detail": "Phase 0 quality could not assess (no/insufficient element sets); neutral prior."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.7,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime LEO: base risk 0.70."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 0.9797958971132712,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~24 yr since launch (2002); risk 0.98 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "04e95ff287d7f2b93d49f5e619c09d2af9e20b5ec57ee8f0a48beabd704f5be5",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 13974,
+      "object_name": "RADUGA 12",
+      "orbital_regime": "GEO",
+      "composite_score": 0.6662307692307692,
+      "grade": "C",
+      "confidence": 0.2,
+      "low_confidence": true,
+      "degraded_factors": [
+        "element_set_quality",
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.8922,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "14 close approach(es) within +/-7d (count factor 1.00, worst severity 0.78)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.5,
+          "weight": 0.2,
+          "degraded": true,
+          "detail": "Phase 0 quality could not assess (no/insufficient element sets); neutral prior."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.4,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime GEO: base risk 0.40."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 1.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~43 yr since launch (1983); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "38e769533038e3fc2490888d9376baef1dde09884b9c0f31095f4545d0ad3395",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 15677,
+      "object_name": "GSTAR 1",
+      "orbital_regime": "GEO",
+      "composite_score": 0.632,
+      "grade": "C",
+      "confidence": 0.2,
+      "low_confidence": true,
+      "degraded_factors": [
+        "element_set_quality",
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.8032,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "15 close approach(es) within +/-7d (count factor 1.00, worst severity 0.61)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.5,
+          "weight": 0.2,
+          "degraded": true,
+          "detail": "Phase 0 quality could not assess (no/insufficient element sets); neutral prior."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.4,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime GEO: base risk 0.40."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 1.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~41 yr since launch (1985); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "b7b4e67934b96b38317ae79c6eb3504aedbe4a1d50db8c5885506571ee91e445",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 25598,
+      "object_name": "SL-12 R/B(2)",
+      "orbital_regime": "MEO",
+      "composite_score": 0.6314615384615384,
+      "grade": "C",
+      "confidence": 0.2,
+      "low_confidence": true,
+      "degraded_factors": [
+        "element_set_quality",
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.7718,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "18 close approach(es) within +/-7d (count factor 1.00, worst severity 0.54)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.5,
+          "weight": 0.2,
+          "degraded": true,
+          "detail": "Phase 0 quality could not assess (no/insufficient element sets); neutral prior."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.45,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime MEO: base risk 0.45."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 1.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~28 yr since launch (1998); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "cc05c92b9ad213c81f39fa8f856b49cde0c4d6439c22de7ac5f1791de612416d",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 23205,
+      "object_name": "COSMOS 2288 (GLONASS)",
+      "orbital_regime": "MEO",
+      "composite_score": 0.5569999999999999,
+      "grade": "C",
+      "confidence": 0.2,
+      "low_confidence": true,
+      "degraded_factors": [
+        "element_set_quality",
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.5782,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "90 close approach(es) within +/-7d (count factor 1.00, worst severity 0.16)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.5,
+          "weight": 0.2,
+          "degraded": true,
+          "detail": "Phase 0 quality could not assess (no/insufficient element sets); neutral prior."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.45,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime MEO: base risk 0.45."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 1.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~32 yr since launch (1994); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "ad9a04003e7c6cbf50aa95a11b6a1ea734b5a7219a41f3dc32dadfd55da7707a",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 899,
+      "object_name": "EXPLORER 22",
+      "orbital_regime": "LEO",
+      "composite_score": 0.3923076923076923,
+      "grade": "A",
+      "confidence": 0.2,
+      "low_confidence": true,
+      "degraded_factors": [
+        "element_set_quality",
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.0,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.5,
+          "weight": 0.2,
+          "degraded": true,
+          "detail": "Phase 0 quality could not assess (no/insufficient element sets); neutral prior."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.7,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime LEO: base risk 0.70."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 1.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~62 yr since launch (1964); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "762f469addd48863f07bcbe05e0b5cedb45a1c7f31bdf9a7e41b3e3aac831fc4",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 1576,
+      "object_name": "VANGUARD DEB",
+      "orbital_regime": "LEO",
+      "composite_score": 0.3923076923076923,
+      "grade": "A",
+      "confidence": 0.2,
+      "low_confidence": true,
+      "degraded_factors": [
+        "element_set_quality",
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.0,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.5,
+          "weight": 0.2,
+          "degraded": true,
+          "detail": "Phase 0 quality could not assess (no/insufficient element sets); neutral prior."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.7,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime LEO: base risk 0.70."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 1.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~68 yr since launch (1958); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "35e39783bc2cecad1d8d5a849ff1c8d20c5f5c46384c1520ff09c8ba14b9b55e",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 22514,
+      "object_name": "COSMOS 2235 (GLONASS)",
+      "orbital_regime": "MEO",
+      "composite_score": 0.3346153846153846,
+      "grade": "A",
+      "confidence": 0.2,
+      "low_confidence": true,
+      "degraded_factors": [
+        "element_set_quality",
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.0,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.5,
+          "weight": 0.2,
+          "degraded": true,
+          "detail": "Phase 0 quality could not assess (no/insufficient element sets); neutral prior."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.45,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime MEO: base risk 0.45."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 1.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~33 yr since launch (1993); risk 1.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "4382fdf080a093954e13f661a3c20b220ebced790dc93b9f796a2713d19b0b89",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 270449,
+      "object_name": "TBA - TO BE ASSIGNED",
+      "orbital_regime": "LEO",
+      "composite_score": 0.2769230769230769,
+      "grade": "A",
+      "confidence": 0.2,
+      "low_confidence": true,
+      "degraded_factors": [
+        "element_set_quality",
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.0,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.5,
+          "weight": 0.2,
+          "degraded": true,
+          "detail": "Phase 0 quality could not assess (no/insufficient element sets); neutral prior."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.7,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime LEO: base risk 0.70."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Launch year unknown; neutral age assumed. Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "65f29a27429ac78d9044d0bfbd57d0db82a29010539737551e6c0939ab71c478",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 67306,
+      "object_name": "STARLINK-36488",
+      "orbital_regime": "LEO",
+      "composite_score": 0.22490846475175527,
+      "grade": "A",
+      "confidence": 0.95,
+      "low_confidence": false,
+      "degraded_factors": [
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.0,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.4308609751949599,
+          "weight": 0.2,
+          "degraded": false,
+          "detail": "Phase 0 quality grade C (composite 57/100) -> inverted risk 0.43: poor tracking is risk."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.7,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime LEO: base risk 0.70."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 0.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~0 yr since launch (2026); risk 0.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "bcbeb1b05a70d80e38bbef54ee03da3619852c51738df6e11518ab9e721a9fb9",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 67304,
+      "object_name": "CSG-3",
+      "orbital_regime": "LEO",
+      "composite_score": 0.20980691843672866,
+      "grade": "A",
+      "confidence": 0.95,
+      "low_confidence": false,
+      "degraded_factors": [
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.0,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.3666794033560967,
+          "weight": 0.2,
+          "degraded": false,
+          "detail": "Phase 0 quality grade C (composite 63/100) -> inverted risk 0.37: poor tracking is risk."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.7,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime LEO: base risk 0.70."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 0.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~0 yr since launch (2026); risk 0.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "a9fb582b985ee9f3c41fac2e04e6d4c13f9f51d4072ba8316447677f87a4dc07",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 68791,
+      "object_name": "NAVSTAR 86 (USA 585)",
+      "orbital_regime": "MEO",
+      "composite_score": 0.18179059309318682,
+      "grade": "A",
+      "confidence": 0.95,
+      "low_confidence": false,
+      "degraded_factors": [
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.0,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.43511002064604387,
+          "weight": 0.2,
+          "degraded": false,
+          "detail": "Phase 0 quality grade C (composite 56/100) -> inverted risk 0.44: poor tracking is risk."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.45,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime MEO: base risk 0.45."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 0.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~0 yr since launch (2026); risk 0.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "666e516e1c977e917027666d03839b6f20acbd0d118dae4aaadf5c29eb38ecc0",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 64866,
+      "object_name": "O3B MPOWER F9",
+      "orbital_regime": "MEO",
+      "composite_score": 0.18070933020548624,
+      "grade": "A",
+      "confidence": 0.95,
+      "low_confidence": false,
+      "degraded_factors": [
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.0,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.2805146533733165,
+          "weight": 0.2,
+          "degraded": false,
+          "detail": "Phase 0 quality grade B (composite 72/100) -> inverted risk 0.28: poor tracking is risk."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.45,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime MEO: base risk 0.45."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 0.2,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~1 yr since launch (2025); risk 0.20 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "5169afaa4dd6ba003a16f69848031558100e9e3ef99c08b8deace67aa278965c",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 62483,
+      "object_name": "THURAYA-4",
+      "orbital_regime": "GEO",
+      "composite_score": 0.1664275996885522,
+      "grade": "A",
+      "confidence": 0.95,
+      "low_confidence": false,
+      "degraded_factors": [
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.0,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.2573172986763468,
+          "weight": 0.2,
+          "degraded": false,
+          "detail": "Phase 0 quality grade B (composite 74/100) -> inverted risk 0.26: poor tracking is risk."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.4,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime GEO: base risk 0.40."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 0.2,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~1 yr since launch (2025); risk 0.20 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "2b87856736530e766c129295c7b7414e487876c83d118cab85c9483e2c98657f",
+      "delta": null
+    },
+    {
+      "norad_cat_id": 68126,
+      "object_name": "ECHOSTAR 25",
+      "orbital_regime": "GEO",
+      "composite_score": 0.1415112277455932,
+      "grade": "A",
+      "confidence": 0.9487617341929012,
+      "low_confidence": false,
+      "degraded_factors": [
+        "operator_track_record"
+      ],
+      "factors": [
+        {
+          "name": "conjunction_frequency",
+          "label": "Conjunction frequency",
+          "normalized": 0.0,
+          "weight": 0.25,
+          "degraded": false,
+          "detail": "0 close approach(es) within +/-7d (count factor 0.00, worst severity 0.00)."
+        },
+        {
+          "name": "element_set_quality",
+          "label": "Element-set quality",
+          "normalized": 0.30142271791877107,
+          "weight": 0.2,
+          "degraded": false,
+          "detail": "Phase 0 quality grade C (composite 70/100) -> inverted risk 0.30: poor tracking is risk."
+        },
+        {
+          "name": "orbital_regime",
+          "label": "Orbital regime",
+          "normalized": 0.4,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "Orbital regime GEO: base risk 0.40."
+        },
+        {
+          "name": "component_age",
+          "label": "Component age",
+          "normalized": 0.0,
+          "weight": 0.15,
+          "degraded": false,
+          "detail": "~0 yr since launch (2026); risk 0.00 (concave, saturates near 25 yr). Launch-year proxy (not component-level telemetry)."
+        },
+        {
+          "name": "operator_track_record",
+          "label": "Operator track record",
+          "normalized": 0.5,
+          "weight": 0.15,
+          "degraded": true,
+          "detail": "Operator history insufficient (0 record(s) < 5); neutral prior. Strengthens as labeled history accumulates."
+        },
+        {
+          "name": "space_weather",
+          "label": "Space weather",
+          "normalized": 0.0,
+          "weight": 0.1,
+          "degraded": false,
+          "detail": "Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 2h old."
+        }
+      ],
+      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "model_version": "h-1.0",
+      "provenance_hash": "acd3698962635f56bf2d97671505a35e3b845d63686ec929fd128bb58015c70d",
+      "delta": null
+    }
+  ],
+  "unscored": [],
+  "is_sample_report": true,
+  "calibration_status": "Calibration status: factor weights and grade bands are STARTING values (model h-1.0), not yet calibrated against historical events; calibration is in progress. Scores are an explainable heuristic, not a forecast.",
+  "other_grade_counts": {},
+  "public_intro": {
+    "description": "Drosjer Quantum continuously scores orbital risk for satellite fleets from public tracking data, breaking every score into six transparent factors with a confidence level you can see.",
+    "tagline": "Continuous orbital risk scoring. Six transparent factors. Confidence on every score. Calibration against historical events in progress.",
+    "public_data_statement": "Scores below are computed from public CelesTrak / Space-Track data on a demonstration sample of public objects. No customer fleet is shown.",
+    "conditions_note": "Risk grades are conditions-dependent: they rise during geomagnetic activity and busier conjunction periods, and the engine re-scores continuously as conditions change. A grade is a live reading of current conditions, not a fixed label \u2014 the responsiveness is the point.",
+    "cta_label": "Request early access",
+    "cta_url": "https://cal.com/vilhelm-drosjer/discovery-call",
+    "cta_email": "vilhelm@drosjerquantum.com"
+  }
+}
