@@ -1,6 +1,6 @@
 {
   "customer_name": "",
-  "generated_at": "2026-06-03T23:16:07.702899+00:00",
+  "generated_at": "2026-06-04T00:10:58.302373+00:00",
   "model_version": "h-1.0",
   "grade_bands": [
     [
@@ -102,12 +102,12 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "f3584e5197b0bfa2b627149aac57bc7ae39e9d1822166bb5b2a4eef9982e20cd",
+      "provenance_hash": "51f27bdd1b0c871a0121740f757e58cf650b38f84dae1578b1dea902064a0c08",
       "delta": null
     },
     {
@@ -169,12 +169,12 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "a542a1f08353f2c9acc998345ec7a24f20c58954d4fbc14c44e7bdfee0047e99",
+      "provenance_hash": "7a326e5a8e25fd5401dc9d3f45c5e0b4d8a101c7be94a90fdf8c1e959bea514d",
       "delta": null
     },
     {
@@ -236,12 +236,12 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "5839bbf898c8584d1631a981571cb939e682de9a01af274addaaa5360fa14517",
+      "provenance_hash": "4c754a947afd7b5182e3b47559589d635de34abc7120745a2a2486139c63fb18",
       "delta": null
     },
     {
@@ -303,12 +303,12 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "04e95ff287d7f2b93d49f5e619c09d2af9e20b5ec57ee8f0a48beabd704f5be5",
+      "provenance_hash": "54ff359ef6a589bff47b3e331957834a71cc357e73063a6346d41599a8ce877d",
       "delta": null
     },
     {
@@ -370,12 +370,12 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "38e769533038e3fc2490888d9376baef1dde09884b9c0f31095f4545d0ad3395",
+      "provenance_hash": "83600d732ff7b05149dd2dbb5e04c68bde2f9c5cd46dee796f428d417423b635",
       "delta": null
     },
     {
@@ -437,12 +437,12 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "b7b4e67934b96b38317ae79c6eb3504aedbe4a1d50db8c5885506571ee91e445",
+      "provenance_hash": "31246b7c28415aba5a69885b8d8d844699f7643fa9c9e1e4777eea996a1a120f",
       "delta": null
     },
     {
@@ -504,12 +504,12 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "cc05c92b9ad213c81f39fa8f856b49cde0c4d6439c22de7ac5f1791de612416d",
+      "provenance_hash": "a088d0070f50629ec57f9fa7e9729ab720e30f4d21380254f53458fd484cf647",
       "delta": null
     },
     {
@@ -571,12 +571,12 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "ad9a04003e7c6cbf50aa95a11b6a1ea734b5a7219a41f3dc32dadfd55da7707a",
+      "provenance_hash": "8eb3eb7c87216540e6bb41be15ff770c89f25cd7568783307d6d6f53fe1d387e",
       "delta": null
     },
     {
@@ -638,12 +638,12 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "762f469addd48863f07bcbe05e0b5cedb45a1c7f31bdf9a7e41b3e3aac831fc4",
+      "provenance_hash": "68d7465811f708c642f10b260030de7ce752ed77b43727c6749dd1b3c9686984",
       "delta": null
     },
     {
@@ -705,12 +705,12 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "35e39783bc2cecad1d8d5a849ff1c8d20c5f5c46384c1520ff09c8ba14b9b55e",
+      "provenance_hash": "c38a5d08a3491812d039a84eba4fbed358831ae93a4d289d38484bbdeb605b86",
       "delta": null
     },
     {
@@ -772,12 +772,12 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "4382fdf080a093954e13f661a3c20b220ebced790dc93b9f796a2713d19b0b89",
+      "provenance_hash": "fc7a14c51d1086f450f75f7960bc97ea194f654952b6443cb39149df68528bbf",
       "delta": null
     },
     {
@@ -839,19 +839,19 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "65f29a27429ac78d9044d0bfbd57d0db82a29010539737551e6c0939ab71c478",
+      "provenance_hash": "dfccd9455af9347c40584e366bfda4ae0acd5d832f2b3b547d0656108fa87c1b",
       "delta": null
     },
     {
       "norad_cat_id": 67306,
       "object_name": "STARLINK-36488",
       "orbital_regime": "LEO",
-      "composite_score": 0.22490846475175527,
+      "composite_score": 0.22572312981959047,
       "grade": "A",
       "confidence": 0.95,
       "low_confidence": false,
@@ -870,7 +870,7 @@
         {
           "name": "element_set_quality",
           "label": "Element-set quality",
-          "normalized": 0.4308609751949599,
+          "normalized": 0.4343233017332595,
           "weight": 0.2,
           "degraded": false,
           "detail": "Phase 0 quality grade C (composite 57/100) -> inverted risk 0.43: poor tracking is risk."
@@ -905,19 +905,19 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "bcbeb1b05a70d80e38bbef54ee03da3619852c51738df6e11518ab9e721a9fb9",
+      "provenance_hash": "e810db882787f97d48cdac7cbb8ab08ec079fa896a44cd4d389c722dc9b239be",
       "delta": null
     },
     {
       "norad_cat_id": 67304,
       "object_name": "CSG-3",
       "orbital_regime": "LEO",
-      "composite_score": 0.20980691843672866,
+      "composite_score": 0.21062158350456386,
       "grade": "A",
       "confidence": 0.95,
       "low_confidence": false,
@@ -936,7 +936,7 @@
         {
           "name": "element_set_quality",
           "label": "Element-set quality",
-          "normalized": 0.3666794033560967,
+          "normalized": 0.3701417298943964,
           "weight": 0.2,
           "degraded": false,
           "detail": "Phase 0 quality grade C (composite 63/100) -> inverted risk 0.37: poor tracking is risk."
@@ -971,19 +971,19 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime LEO sensitivity 1.00 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "a9fb582b985ee9f3c41fac2e04e6d4c13f9f51d4072ba8316447677f87a4dc07",
+      "provenance_hash": "009d93cbee7109c73ba628c173e37e39af093b72b8850f2cd0556c7c5dd6808a",
       "delta": null
     },
     {
       "norad_cat_id": 68791,
       "object_name": "NAVSTAR 86 (USA 585)",
       "orbital_regime": "MEO",
-      "composite_score": 0.18179059309318682,
+      "composite_score": 0.18260525794711824,
       "grade": "A",
       "confidence": 0.95,
       "low_confidence": false,
@@ -1002,7 +1002,7 @@
         {
           "name": "element_set_quality",
           "label": "Element-set quality",
-          "normalized": 0.43511002064604387,
+          "normalized": 0.43857234627525254,
           "weight": 0.2,
           "degraded": false,
           "detail": "Phase 0 quality grade C (composite 56/100) -> inverted risk 0.44: poor tracking is risk."
@@ -1037,19 +1037,19 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "666e516e1c977e917027666d03839b6f20acbd0d118dae4aaadf5c29eb38ecc0",
+      "provenance_hash": "bad59174a482655c4e6f577881b3e81813afbd9d51be5f239ccca83850a739fc",
       "delta": null
     },
     {
       "norad_cat_id": 64866,
       "object_name": "O3B MPOWER F9",
       "orbital_regime": "MEO",
-      "composite_score": 0.18070933020548624,
+      "composite_score": 0.17724826201128938,
       "grade": "A",
       "confidence": 0.95,
       "low_confidence": false,
@@ -1068,10 +1068,10 @@
         {
           "name": "element_set_quality",
           "label": "Element-set quality",
-          "normalized": 0.2805146533733165,
+          "normalized": 0.26580511354797975,
           "weight": 0.2,
           "degraded": false,
-          "detail": "Phase 0 quality grade B (composite 72/100) -> inverted risk 0.28: poor tracking is risk."
+          "detail": "Phase 0 quality grade B (composite 73/100) -> inverted risk 0.27: poor tracking is risk."
         },
         {
           "name": "orbital_regime",
@@ -1103,19 +1103,19 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime MEO sensitivity 0.40 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "5169afaa4dd6ba003a16f69848031558100e9e3ef99c08b8deace67aa278965c",
+      "provenance_hash": "cb4bfd5200301bc4362a60368c1aa71958c5fc5341749f88c090daa20d00c4f5",
       "delta": null
     },
     {
       "norad_cat_id": 62483,
       "object_name": "THURAYA-4",
       "orbital_regime": "GEO",
-      "composite_score": 0.1664275996885522,
+      "composite_score": 0.16520986999702914,
       "grade": "A",
       "confidence": 0.95,
       "low_confidence": false,
@@ -1134,10 +1134,10 @@
         {
           "name": "element_set_quality",
           "label": "Element-set quality",
-          "normalized": 0.2573172986763468,
+          "normalized": 0.25214194748737384,
           "weight": 0.2,
           "degraded": false,
-          "detail": "Phase 0 quality grade B (composite 74/100) -> inverted risk 0.26: poor tracking is risk."
+          "detail": "Phase 0 quality grade B (composite 75/100) -> inverted risk 0.25: poor tracking is risk."
         },
         {
           "name": "orbital_regime",
@@ -1169,21 +1169,21 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "2b87856736530e766c129295c7b7414e487876c83d118cab85c9483e2c98657f",
+      "provenance_hash": "a243c58d329d1a6bc64d3b8f7d861005a694f6d1d7c6082fcadea5ee70687b20",
       "delta": null
     },
     {
       "norad_cat_id": 68126,
       "object_name": "ECHOSTAR 25",
       "orbital_regime": "GEO",
-      "composite_score": 0.1415112277455932,
+      "composite_score": 0.13055363324123587,
       "grade": "A",
-      "confidence": 0.9487617341929012,
+      "confidence": 0.95,
       "low_confidence": false,
       "degraded_factors": [
         "operator_track_record"
@@ -1200,10 +1200,10 @@
         {
           "name": "element_set_quality",
           "label": "Element-set quality",
-          "normalized": 0.30142271791877107,
+          "normalized": 0.2548529412752525,
           "weight": 0.2,
           "degraded": false,
-          "detail": "Phase 0 quality grade C (composite 70/100) -> inverted risk 0.30: poor tracking is risk."
+          "detail": "Phase 0 quality grade B (composite 75/100) -> inverted risk 0.25: poor tracking is risk."
         },
         {
           "name": "orbital_regime",
@@ -1235,12 +1235,12 @@
           "normalized": 0.0,
           "weight": 0.1,
           "degraded": false,
-          "detail": "Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 2h old."
+          "detail": "Kp 0.00 (risk 0.00) x regime GEO sensitivity 0.10 = 0.00, F10.7 147; reading 0h old."
         }
       ],
-      "scored_at": "2026-06-03T23:16:07.672550+00:00",
+      "scored_at": "2026-06-04T00:10:58.267692+00:00",
       "model_version": "h-1.0",
-      "provenance_hash": "acd3698962635f56bf2d97671505a35e3b845d63686ec929fd128bb58015c70d",
+      "provenance_hash": "5bb38f0768e6164d912c663e386b19ce56e28727fffc3f94b39f41dffe34a725",
       "delta": null
     }
   ],
